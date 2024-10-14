@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class SmellyJava {
         int a, b, c;
         int counter2;
