@@ -29,18 +29,20 @@ public class Driver {
         }
 
         public void visit(FieldDeclaration n, Object args) {
-            InitLocal(n, args);
+            InitLocal(n, args); // Initialise local variables on declaration
             super.visit(n, args);
         }
 
+        // Method to detect lack if initialisation for local variables on declaration
         public void InitLocal(FieldDeclaration n, Object args) {
             for(VariableDeclarator v : n.getVariables()) {
-                if (!v.getInitializer().isPresent()) {
+                if (v.getInitializer().isEmpty()) {
                     SmellyCodeFound(v.getNameAsString());
                 }
             }
         }
 
+        // Method called when smelly code is found
         public void SmellyCodeFound(String error){
             System.out.println("Smelly Code Found! Reason:" + error);
         }
