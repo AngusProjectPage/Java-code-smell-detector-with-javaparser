@@ -5,7 +5,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
-import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
 import java.io.FileInputStream;
@@ -29,22 +29,53 @@ public class Driver {
         }
 
         public void visit(FieldDeclaration n, Object args) {
-            InitLocal(n, args); // Initialise local variables on declaration
+            checkOneVariablePerDeclaration(n);
             super.visit(n, args);
         }
 
-        // Method to detect lack if initialisation for local variables on declaration
-        public void InitLocal(FieldDeclaration n, Object args) {
-            for(VariableDeclarator v : n.getVariables()) {
+        public void visit(VariableDeclarationExpr n, Object args) {
+            checkUninitialisedVariables(n);
+            checkOneVariablePerDeclaration(n);
+            super.visit(n, args);
+        }
+
+        /**
+         * Check if local variables are initialised upon declaration.
+         */
+        private void checkUninitialisedVariables(VariableDeclarationExpr n) {
+            for (VariableDeclarator v : n.getVariables()) {
                 if (v.getInitializer().isEmpty()) {
-                    SmellyCodeFound(v.getNameAsString());
+                    smellyCodeFound("Uninitialized local variable: " + v.getNameAsString());
                 }
             }
         }
 
-        // Method called when smelly code is found
-        public void SmellyCodeFound(String error){
-            System.out.println("Smelly Code Found! Reason:" + error);
+        /**
+         * Check if each variable declaration declares only one variable.
+         */
+        private void checkOneVariablePerDeclaration(FieldDeclaration n) {
+            if (n.getVariables().size() > 1) {
+                smellyCodeFound("Multiple variables declared in one statement: " + n.getVariables());
+            }
+        }
+
+        /**
+         * Check if each variable declaration declares only one variable.
+         */
+        private void checkOneVariablePerDeclaration(VariableDeclarationExpr n) {
+            if (n.getParentNode().isEmpty() && n.getParentNode().get() instanceof ForStmt) {
+                if (n.getVariables().size() > 1) {
+                    smellyCodeFound("Multiple variables declared in one statement (local declaration): " + n.getVariables());
+                }
+            }
+        }
+
+        /**
+         * Report smelly code with a message.
+         */
+        private void smellyCodeFound(String message) {
+            System.out.println("Smelly Code Found! Reason: " + message);
         }
     }
 }
+
