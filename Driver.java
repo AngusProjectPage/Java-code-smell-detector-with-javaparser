@@ -24,12 +24,25 @@ public class Driver {
     }
 
     public static class SmellyCodeVisitor extends VoidVisitorAdapter {
-        public void visit(ClassOrInterfaceDeclaration n, Object arg) {
-
+        public void visit(ClassOrInterfaceDeclaration n, Object args) {
+            super.visit(n, args);
         }
 
-        public void visit(FieldDeclaration n, Object a) {
+        public void visit(FieldDeclaration n, Object args) {
+            InitLocal(n, args);
+            super.visit(n, args);
+        }
 
+        public void InitLocal(FieldDeclaration n, Object args) {
+            for(VariableDeclarator v : n.getVariables()) {
+                if (!v.getInitializer().isPresent()) {
+                    SmellyCodeFound(v.getNameAsString());
+                }
+            }
+        }
+
+        public void SmellyCodeFound(String error){
+            System.out.println("Smelly Code Found! Reason:" + error);
         }
     }
 }
