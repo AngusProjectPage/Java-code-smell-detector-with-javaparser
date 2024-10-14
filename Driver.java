@@ -16,6 +16,7 @@ public class Driver {
 
         new UninitialisedVariableSmell().visit(cu, null);
         new MultipleVariableDeclarationSmell().visit(cu, null);
+        new SimpleAssignmentSmell().visit(cu, null);
     }
 
     /**
