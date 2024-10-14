@@ -7,7 +7,6 @@ import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-
 import java.io.FileInputStream;
 
 public class Driver {
@@ -25,15 +24,17 @@ public class Driver {
 
     public static class SmellyCodeVisitor extends VoidVisitorAdapter {
 
+        private boolean publicField = false;
+
         @Override
         public void visit(ClassOrInterfaceDeclaration n, Object args) {
-
             super.visit(n, args);
         }
 
         @Override
         public void visit(FieldDeclaration n, Object args) {
             InitLocal(n, args); // Initialise local variables on declaration
+            limitAccess(n, args);
             super.visit(n, args);
         }
 
@@ -44,7 +45,7 @@ public class Driver {
         }
 
         public void simpleAssignment(AssignExpr n) {
-            if(n.getValue().isAssignExpr()) SmellyCodeFound("Keep assignments simple " + n.getValue() + " cannot be assigned to " + n.getTarget());
+            if(n.getValue().isAssignExpr()) SmellyCodeFound(" Keep assignments simple " + n.getValue() + " cannot be assigned to " + n.getTarget());
         }
 
         // Method to detect lack if initialisation for local variables on declaration
@@ -55,6 +56,14 @@ public class Driver {
                 }
             }
         }
+
+        public void limitAccess(FieldDeclaration n, Object args) {
+            // Update public field to true, if class now has a method it will return a code smell.
+            publicField = true;
+            if(n.isPublic()) publicField = true;
+        }
+
+        public void limitAccess()
         
         // Method called when smelly code is found
         public void SmellyCodeFound(String error){
