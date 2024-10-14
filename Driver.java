@@ -33,6 +33,7 @@ public class Driver {
 
         @Override
         public void visit(FieldDeclaration n, Object args) {
+            InitLocal(n, args); // Initialise local variables on declaration
             super.visit(n, args);
         }
 
@@ -46,8 +47,18 @@ public class Driver {
             if(n.getValue().isAssignExpr()) SmellyCodeFound("Keep assignments simple " + n.getValue() + " cannot be assigned to " + n.getTarget());
         }
 
-        public void SmellyCodeFound(String str) {
-            System.out.println(str);
+        // Method to detect lack if initialisation for local variables on declaration
+        public void InitLocal(FieldDeclaration n, Object args) {
+            for(VariableDeclarator v : n.getVariables()) {
+                if (v.getInitializer().isEmpty()) {
+                    SmellyCodeFound(v.getNameAsString());
+                }
+            }
+        }
+        
+        // Method called when smelly code is found
+        public void SmellyCodeFound(String error){
+            System.out.println("Smelly Code Found! Reason:" + error);
         }
     }
 }
