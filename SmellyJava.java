@@ -1,6 +1,7 @@
 public class SmellyJava {
         // Field declarations with multiple variables in one statement (smelly)
-        int a, b, c;
+        private int a, b, c;
+        public String callum = "hi";
 
         public void methodExample() {
                 // Uninitialized local variable (smelly)
