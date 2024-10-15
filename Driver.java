@@ -2,6 +2,8 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
 import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Driver {
 
