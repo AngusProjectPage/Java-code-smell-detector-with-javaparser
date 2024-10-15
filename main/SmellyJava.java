@@ -1,3 +1,5 @@
+package main;
+
 public class SmellyJava {
         // Field declarations with multiple variables in one statement (smelly)
         private int a, b, c;

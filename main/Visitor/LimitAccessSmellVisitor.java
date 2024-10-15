@@ -1,4 +1,6 @@
-import DTO.LimitAccessSmellDTO;
+package main.Visitor;
+
+import main.dto.LimitAccessSmellDTO;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;

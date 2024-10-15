@@ -1,4 +1,4 @@
-package DTO;
+package main.dto;
 
 import com.github.javaparser.ast.body.VariableDeclarator;
 
