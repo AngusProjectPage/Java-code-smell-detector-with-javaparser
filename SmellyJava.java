@@ -23,5 +23,13 @@ public class SmellyJava {
 
                 // Uninitialized variable later assigned (should still trigger the smell for x)
                 x = 10;
+
+                //Variable initialized within the heart of code (smell)
+                int count;
+                String condition = "Conditions";
+                if (condition.length() == 5) {
+                        //noinspection UnusedDeclaration
+                        //int count;
+                }
         }
 }
