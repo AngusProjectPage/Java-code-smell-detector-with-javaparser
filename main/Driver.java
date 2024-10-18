@@ -5,6 +5,7 @@ import main.Visitor.SimpleAssignmentSmellVisitor;
 import main.Visitor.UninitialisedVariableSmellVisitor;
 import main.dto.LimitAccessSmellDTO;
 import main.Visitor.LimitAccessSmellVisitor;
+import main.Visitor.FieldDeclarationSmellVisitor;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -12,7 +13,7 @@ import java.io.FileInputStream;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("main/SmellyJava.java");
+        FileInputStream in = new FileInputStream("C:\\Users\\harry\\OneDrive\\Desktop\\SmellyJava.java");
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(in);
@@ -22,6 +23,7 @@ public class Driver {
         new UninitialisedVariableSmellVisitor().visit(cu, null);
         new MultipleVariableDeclarationSmellVisitor().visit(cu, null);
         new SimpleAssignmentSmellVisitor().visit(cu, null);
+        new FieldDeclarationSmellVisitor().visit(cu, null);
         checkLimitAccessSmells(cu);
     }
 

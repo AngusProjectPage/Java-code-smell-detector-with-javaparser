@@ -7,7 +7,7 @@ public class NumericalConstants extends VoidVisitorAdapter<Object> {
     private static final int[] ALLOWED_LITERALS = {-1,0,1};
     /**
     @Override
-    public void visit(FieldDeclaration n, Object args) {
+    public void visit(main.Visitor.FieldDeclaration n, Object args) {
         if (n.isPublic() && n.isStatic() && n.isFinal() && (n.getTokenRange().isPrimitiveType() || n.getTokenRange().isReferenceType())) {
             n.getVariable(0).getInitializer();
         }
