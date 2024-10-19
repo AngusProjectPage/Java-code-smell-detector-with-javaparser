@@ -15,9 +15,15 @@ public class SmellyJava {
                 // Simple but smelly assignment expression (a = b = 5)
                 int d;
                 d = b = 5;  // Should trigger "Keep assignments simple" smell
+                int l;
+                l = 4;
 
                 // Variable that does not follow camelCase convention (smelly)
                 int BadVariableName = 10;
+
+                if(4 < 7) {
+                        int h = 2;
+                }
 
                 // For loop with multiple variable declarations (acceptable)
                 for (int i = 0, j = 0; i < 10; i++) {
