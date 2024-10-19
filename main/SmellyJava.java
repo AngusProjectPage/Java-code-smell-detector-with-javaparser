@@ -21,13 +21,14 @@ public class SmellyJava {
                 // Variable that does not follow camelCase convention (smelly)
                 int BadVariableName = 10;
 
-                if(4 < 7) {
+                if(4 < -7) {
                         int h = 2;
                 }
 
                 // For loop with multiple variable declarations (acceptable)
-                for (int i = 0, j = 0; i < 10; i++) {
+                for (int i = 0, j = 0; i > -8; i++) {
                         System.out.println(i);
+                        l++;
                 }
 
                 // Uninitialized variable later assigned (should still trigger the smell for x)
