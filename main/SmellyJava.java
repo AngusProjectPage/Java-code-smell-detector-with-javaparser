@@ -46,4 +46,20 @@ public class SmellyJava {
                                 break;
                 }
         }
+
+        public void testDefaultNotLast() {
+                int input = 2;
+                // Test case where 'default' is not last (smelly)
+                switch (input) {
+                        default:
+                                System.out.println("Default case");
+                                break;
+                        case 1:
+                                System.out.println("Case 1");
+                                break;
+                        case 2:
+                                System.out.println("Case 2");
+                                break;
+                }
+        }
 }

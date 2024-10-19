@@ -20,7 +20,8 @@ public class Driver {
 //        new MultipleVariableDeclarationSmellVisitor().visit(cu, null);
 //        new SimpleAssignmentSmellVisitor().visit(cu, null);
 //        checkLimitAccessSmells(cu);
-        new SwitchFallThroughSmellVisitor().visit(cu, null);
+//        new SwitchFallThroughSmellVisitor().visit(cu, null);
+        new DefaultSwitchSmellVisitor().visit(cu, null);
     }
 
     public static void checkLimitAccessSmells(CompilationUnit cu) {
