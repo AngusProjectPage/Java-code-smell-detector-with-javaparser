@@ -34,4 +34,23 @@ public class SmellyJava {
                 // Uninitialized variable later assigned (should still trigger the smell for x)
                 x = 10;
         }
+
+        public void anotherExample() {
+                // Switch statement with fall-through and no comment (smelly)
+                int input = 2;
+                switch (input) {
+                        case 1:
+                                System.out.println("Case 1");
+                                // return an error!
+                        case 2:
+                                System.out.println("Case 1 or 2");
+                                // fall through
+                        case 3:
+                                System.out.println("Case 3");
+                                break;
+                        default:
+                                System.out.println("Default case");
+                                break;
+                }
+        }
 }

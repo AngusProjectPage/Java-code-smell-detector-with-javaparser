@@ -21,6 +21,7 @@ public class Driver {
         new SimpleAssignmentSmellVisitor().visit(cu, null);
         new AvoidConstantsSmellVisitor().visit(cu, null);
         checkLimitAccessSmells(cu);
+        new SwitchFallThroughSmellVisitor().visit(cu, null);
     }
 
     public static void checkLimitAccessSmells(CompilationUnit cu) {
