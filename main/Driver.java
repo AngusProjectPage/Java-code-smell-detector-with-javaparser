@@ -9,19 +9,20 @@ import java.io.FileInputStream;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("C:\\dev\\multipleBadCodeInstances.java");
+        FileInputStream in = new FileInputStream("C:\\dev\\mutableReferenceExposer.java");
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(in);
         } finally {
             in.close();
         }
-        new UninitialisedVariableSmellVisitor().visit(cu, null);
-        new MultipleVariableDeclarationSmellVisitor().visit(cu, null);
-        new SimpleAssignmentSmellVisitor().visit(cu, null);
-        new AvoidConstantsSmellVisitor().visit(cu, null);
-        checkLimitAccessSmells(cu);
-        new SwitchFallThroughSmellVisitor().visit(cu, null);
+//        new UninitialisedVariableSmellVisitor().visit(cu, null);
+//        new MultipleVariableDeclarationSmellVisitor().visit(cu, null);
+//        new SimpleAssignmentSmellVisitor().visit(cu, null);
+//        new AvoidConstantsSmellVisitor().visit(cu, null);
+//        checkLimitAccessSmells(cu);
+//        new SwitchFallThroughSmellVisitor().visit(cu, null);
+        new PrivateMutableClassVariablesSmellVisitor().visit(cu, null);
     }
 
     public static void checkLimitAccessSmells(CompilationUnit cu) {
