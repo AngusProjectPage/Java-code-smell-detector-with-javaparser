@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("main/SmellyJava.java");
+        FileInputStream in = new FileInputStream("C:\\dev\\multipleBadCodeInstances.java");
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(in);
