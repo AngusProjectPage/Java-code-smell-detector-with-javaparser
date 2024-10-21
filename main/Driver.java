@@ -13,7 +13,7 @@ import java.io.FileInputStream;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("C:\\Users\\harry\\OneDrive\\Desktop\\SmellyJava.java");
+        FileInputStream in = new FileInputStream("C:\\Users\\harry\\OneDrive\\Desktop\\multipleBadCodeInstances.java");
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(in);

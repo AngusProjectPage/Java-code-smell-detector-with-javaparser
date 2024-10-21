@@ -12,46 +12,33 @@ import java.util.Map;
 
 public class FieldDeclarationSmellVisitor extends VoidVisitorAdapter<Object> {
 
-   /** public void visit(com.github.javaparser.ast.body.FieldDeclaration n, Object args) {
+    private Map<String, Node> declaredVariables = new HashMap<>();
 
-        Map<String, Node> declaredVariables = new HashMap<>();
-
-        for (VariableDeclarator v : n.getVariables()) { //iterate through each var declaration
-            String name = v.getNameAsString();
-            if (declaredVariables.containsKey(name)) {
-                Driver.smellyCodeFound("Variable '" + name + "' hides a declaration at a higher level");
-            }
-            declaredVariables.put(name, v);
-        }
+    @Override
+    public void visit(FieldDeclaration n, Object args) {
         super.visit(n, args);
-        } */
-        private Map<String, Node> declaredVariables = new HashMap<>();
+        for (VariableDeclarator v : n.getVariables()) {
+            checkForShadowing(v);
+        }
+    }
 
-        @Override
-        public void visit(FieldDeclaration n, Object args) {
-            super.visit(n, args);
-            for (VariableDeclarator v : n.getVariables()) {
+    @Override
+    public void visit(MethodDeclaration n, Object args) {
+        super.visit(n, args);
+        for (Node child : n.getChildNodes()) {
+            if (child instanceof VariableDeclarator) {
+                VariableDeclarator v = (VariableDeclarator) child;
                 checkForShadowing(v);
-            }
-        }
-
-        @Override
-        public void visit(MethodDeclaration n, Object args) {
-            super.visit(n, args);
-            //for (VariableDeclarator v : n.getVariables()) {
-              //  checkForShadowing(v);
-            //}
-        }
-
-        private void checkForShadowing(VariableDeclarator v) {
-            String name = v.getNameAsString();
-            if (declaredVariables.containsKey(name)) {
-                System.out.println("Variable '" + name + "' hides a declaration at a higher level");
-            } else {
-                declaredVariables.put(name, v);
             }
         }
     }
 
-
-
+    private void checkForShadowing(VariableDeclarator v) {
+        String name = v.getNameAsString();
+        if (declaredVariables.containsKey(name)) {
+            System.out.println("Variable '" + name + "' hides a declaration at a higher level");
+        } else {
+            declaredVariables.put(name, v);
+        }
+    }
+}
