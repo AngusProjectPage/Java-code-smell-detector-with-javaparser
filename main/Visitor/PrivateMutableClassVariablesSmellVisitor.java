@@ -2,12 +2,19 @@ package main.Visitor;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.stmt.ReturnStmt;
 import com.github.javaparser.ast.type.Type;
+import com.github.javaparser.ast.visitor.VoidVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import main.Driver;
+import main.dto.PrivateVariableAndSetterDTO;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,10 +22,18 @@ import java.util.Optional;
 
 public class PrivateMutableClassVariablesSmellVisitor extends VoidVisitorAdapter<Void> {
 
-    // Check that the return signature is of type reference.
-    // Open the class of the reference and begin parsing.
-    // Check if the modifier is private on the class that is a reference.
-    // Check if the class has a setter.
+    // This is a class that checks for the variable that was a reference.
+    public class PrivateVariableAndSetterVisitor extends VoidVisitorAdapter<PrivateVariableAndSetterDTO> {
+
+        @Override
+        public void visit(VariableDeclarationExpr n, PrivateVariableAndSetterDTO privateVariableAndSetterDTO) {
+            for(Modifier mod : n.getModifiers()) {
+                if(mod.getKeyword() == Modifier.privateModifier().getKeyword()) {
+
+                }
+            }
+        }
+    }
 
     public void visit(MethodDeclaration methodDeclaration, Void args) {
         // If the type is of some form of object
@@ -39,7 +54,11 @@ public class PrivateMutableClassVariablesSmellVisitor extends VoidVisitorAdapter
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(in);
-            
+            PrivateVariableAndSetterDTO privateVariableAndSetterDTO = new PrivateVariableAndSetterDTO();
+            new PrivateVariableAndSetterVisitor().visit(cu, privateVariableAndSetterDTO);
+            if(privateVariableAndSetterDTO.isMutable()) {
+                return true;
+            }
         } finally {
             in.close();
         }
