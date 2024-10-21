@@ -1,11 +1,8 @@
 package main;
 
-import main.Visitor.MultipleVariableDeclarationSmellVisitor;
-import main.Visitor.SimpleAssignmentSmellVisitor;
-import main.Visitor.UninitialisedVariableSmellVisitor;
+import main.Visitor.*;
 import main.dto.LimitAccessSmellDTO;
-import main.Visitor.LimitAccessSmellVisitor;
-import main.Visitor.FieldDeclarationSmellVisitor;
+import main.Visitor.ForLoopIterationVariableModificationVisitor;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.VariableDeclarator;
@@ -24,6 +21,7 @@ public class Driver {
         new MultipleVariableDeclarationSmellVisitor().visit(cu, null);
         new SimpleAssignmentSmellVisitor().visit(cu, null);
         new FieldDeclarationSmellVisitor().visit(cu, null);
+        new ForLoopIterationVariableModificationVisitor().visit(cu,null);
         checkLimitAccessSmells(cu);
     }
 
