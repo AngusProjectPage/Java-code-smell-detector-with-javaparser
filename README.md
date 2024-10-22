@@ -5,23 +5,23 @@
 # Code Smell Checklist
 
 ### 1. Initialise local variables on declaration
-- [ ] Local variables should have initializers or be initialized immediately after declaration.
+- [x] Local variables should have initializers or be initialized immediately after declaration.
   - **Example:** `int counter;` instead of `int counter = 1;`
   - **Marks:** 5
 
 ### 2. Keep assignments simple
-- [ ] Avoid assigning several variables to the same value in a single statement.
+- [x] Avoid assigning several variables to the same value in a single statement.
   - **Example:** Avoid `a = b = 'c';`
   - **Marks:** 5
 
 ### 3. One variable per declaration
-- [ ] Each variable declaration (field or local) should declare only one variable.
+- [x] Each variable declaration (field or local) should declare only one variable.
   - **Example:** Avoid `int a, b;`
   - **Exception:** Multiple variable declarations are acceptable in the header of a `for` loop.
   - **Marks:** 3-6
 
 ### 4. Limit access to Instance and Class Variables
-- [ ] Do not make any instance or class variable `public` without a good reason, to maintain encapsulation.
+- [x] Do not make any instance or class variable `public` without a good reason, to maintain encapsulation.
   - **Example:**
     ```java
     public class classOne {
