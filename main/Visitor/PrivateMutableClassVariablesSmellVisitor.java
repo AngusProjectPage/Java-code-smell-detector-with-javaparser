@@ -22,6 +22,7 @@ public class PrivateMutableClassVariablesSmellVisitor extends VoidVisitorAdapter
     public class PrivateVariableAndSetterVisitor extends VoidVisitorAdapter<PrivateVariableAndSetterDTO> {
         @Override
         public void visit(FieldDeclaration n, PrivateVariableAndSetterDTO privateVariableAndSetterDTO) {
+            super.visit(n, privateVariableAndSetterDTO);
             for(Modifier mod : n.getModifiers()) {
                 if(mod.getKeyword() != Modifier.publicModifier().getKeyword()) {
                     privateVariableAndSetterDTO.setVariables(n.getVariables());
@@ -31,11 +32,13 @@ public class PrivateMutableClassVariablesSmellVisitor extends VoidVisitorAdapter
 
         @Override
         public void visit(AssignExpr n, PrivateVariableAndSetterDTO privateVariableAndSetterDTO) {
+            super.visit(n, privateVariableAndSetterDTO);
             privateVariableAndSetterDTO.setAssignment(n);
         }
     }
 
     public void visit(MethodDeclaration methodDeclaration, Void args) {
+        super.visit(methodDeclaration, args);
         // If the type is of some form of object
         if(methodDeclaration.getType().isReferenceType()) {
             Type type = methodDeclaration.getType();
