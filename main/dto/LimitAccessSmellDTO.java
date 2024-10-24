@@ -25,7 +25,7 @@ public class LimitAccessSmellDTO {
         this.methodFound = methodFound;
     }
 
-    public void setVariable(List<VariableDeclarator> variables) {
+    public void setVariables(List<VariableDeclarator> variables) {
         this.variables.addAll(variables);
     }
 }

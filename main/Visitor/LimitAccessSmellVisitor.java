@@ -8,9 +8,9 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 public class LimitAccessSmellVisitor extends VoidVisitorAdapter<LimitAccessSmellDTO> {
 
     @Override
-    public void visit(FieldDeclaration n, LimitAccessSmellDTO args) {
+    public void visit(FieldDeclaration n, LimitAccessSmellDTO limitAccessSmellDTO) {
         if(n.isPublic()) {
-            args.setVariable(n.getVariables());
+            limitAccessSmellDTO.setVariables(n.getVariables());
         }
     }
 
