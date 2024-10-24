@@ -39,16 +39,16 @@ public class Driver {
         if(!outerPrivateVariableExposedDTO.getFieldDeclarations().isEmpty()) {
             if(!outerPrivateVariableExposedDTO.getInnerClasses().isEmpty()) {
                 for(ClassOrInterfaceDeclaration ci : outerPrivateVariableExposedDTO.getInnerClasses()) {
-                    System.out.println(ci.getName() + " is an inner public class exposing private fields from outer class");
+                    System.out.println(ci.getName() + " is an inner public class exposing private fields from outer class.");
                 }
             }
             if(!outerPrivateVariableExposedDTO.getMethodDeclarations().isEmpty()) {
                 for(MethodDeclaration md : outerPrivateVariableExposedDTO.getMethodDeclarations()) {
-                    System.out.println(md.getName() + " is a public method exposing private fields in it's outer class");
+                    System.out.println(md.getName() + " is a public method exposing private fields in it's outer class.");
                 }
             }
             for(VariableDeclarator vd : outerPrivateVariableExposedDTO.getFieldDeclarations()) {
-                System.out.println(vd + " is a private field being exposed by inner class");
+                System.out.println(vd + " is a private field being exposed by inner class.");
             }
         }
     }
