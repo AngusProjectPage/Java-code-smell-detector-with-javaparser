@@ -11,37 +11,71 @@ This section outlines the coding violations that were attempted and which have b
 - **1. Initialise Local Variables on Declaration** 
     - **Implemented**
     - ```UninitialisedVariableSmellVisitor()```
-      - This smell detector runs as expected, no error found in its execution.
+    - Correctly identified `c`, `f`, `lc`, `a`, `b`, `d`, `lc1`, `lc2`, `x`, `y`, and `z` as uninitialised.
 
 - **2. Keep Assignments Simple**
     - **Implemented**
     - ```SimpleAssignmentSmellVisitor()```
+    - Correctly identified `y = z = 123`, and `a = b = c` as non-simple assignments.
 
 - **3. One Variable per Declaration**
     - **Implemented**
     - ```MultipleVariableDeclarationSmellVisitor()```
+    - Correctly identified `[fldi1, fldi2]`, `[fldc1, fldc2]`, `[fls1, fls2]`, `[a, b, d]`, `[lc1, lc2]`, `[x, y, z]` as multiple variable declarations in one statement.
 
 - **4. Limit Access to Instance and Class Variables**
     - **Implemented**
     - ```checkLimitAccessSmells()```
+    - Correctly identified `aVar`, `fldd`, `rn`, `fls1`, and `fls2` as public instance variables in a class that changes state.
 
 - **5. Avoid Local Declarations that Hide Declarations at Higher Levels**
-    - **Not Implemented**
+    - **Implemented**
+    - `FieldDeclarationSmellVisitor()`
+    - Correctly identified `d`, `x`, `dx` as hiding a declaration at a higher level.
 
 - **6. Switch: Fall-Through is Commented**
     - **Implemented**
     - ```SwitchFallThroughSmellVisitor()```
     - **Notes**: This smell detector was horrible, the way JavaParse handles comments remains a mystery to  me even after implementing this, hence why it gets the switch block and converts it to a string (I know it's not ideal, but it was this or nothing)
+    - Correctly identified `result = 1`, `result = 2`, `{`, `case 1:`, and `result = 3` as falling through a switch statement without a comment or abrupt termination.
 
 - **7. Avoid Constants in Code**
     - **Implemented**
     - ```AvoidConstantsSmellVisitor()```
+    - Correctly identified the following:
+      - <pre>
+        In expression x > 0, 0 should be a private final field
+        In expression case "one":result = 1;, "one" should be a private final field
+        In expression case "two":result = result + 1;result = 2;, "two" should be a private final field
+        In expression result + 1, 1 should be a private final field
+        In expression case "three":result = result + 1;result = 3;, "three" should be a private final field
+        In expression result + 1, 1 should be a private final field
+        In expression case 1:, 1 should be a private final field
+        In expression case 2:result = result + response;break;, 2 should be a private final field
+        In expression case 3:result = result / response;result = 3;, 3 should be a private final field
+        In expression case 4:result = result * response;break;, 4 should be a private final field
+        In expression System.out.println("Aay"), "Aay" should be a private final field
+        In expression System.out.println("Eee"), "Eee" should be a private final field
+        In expression System.out.println("Eye"), "Eye" should be a private final field
+        In expression System.out.println("Oh"), "Oh" should be a private final field
+        In expression b == '!', '!' should be a private final field
+        In expression d.equals("Trellis"), "Trellis" should be a private final field
+        In expression c - 0.05, 0.05 should be a private final field
+        In expression c - 0.01, 0.01 should be a private final field
+        In expression a != 10, 10 should be a private final field
+        In expression c > 3.14159, 3.14159 should be a private final field
+        In expression new File("a/file/path/location"), "a/file/path/location" should be a private final field
+        In expression j > -10, -10 should be a private final field
+        In expression i < 100, 100 should be a private final field`
+        </pre>
 
 - **8. Don't Ignore Caught Exceptions**
     - **Not Implemented**
 
 - **9. Don't Change a For Loop Iteration Variable in the Body of the Loop**
-    - **Not Implemented**
+    - **Implemented**
+    - `ForLoopIterationVariableModificationVisitor()`
+    - Correctly identified iteration variable `j` as being modified within the loop body.
 
 - **10. Accessors and Mutators Should Be Named Appropriately**
     - **Not Implemented**
@@ -49,20 +83,29 @@ This section outlines the coding violations that were attempted and which have b
 - **11. Switch: Default Label is Included**
     - **Implemented**
     - ```DefaultSwitchSmellVisitor()```
-      - This smell detector works to identify the missing default cases and incorrect positions of default cases correctly. It has not however implemented the enum exception, leading to some calls when run against the squeakyClean code.
-
+      - This smell detector works to identify the missing default cases and incorrect positions of default cases correctly. 
+    - Correctly identified the following:
+      - <pre>
+        Reason: Switch statement missing 'default' case.
+        Reason: 'Default' case is not the last case in the switch statement.
+        Reason: Switch statement missing 'default' case.
+        </pre>
+    - It has not however implemented the enum exception, leading to some calls when run against the squeakyClean code.
+  
 - **12. Do Not Return References to Private Mutable Class Members**
-    - **Not Implemented**
+    - **Implemented**
+    - `PrivateMutableClassVariablesSmellVisitor()`
 
 - **13. Do Not Expose Private Members of an Outer Class from within a Nested Class**
     - **Implemented**
     - ```checkOuterPrivateVariableExposedSmells()```
+    - Correctly identified `roomNumber`, `accessPoint`, `fldi1`, `fldi2`, `fldc1`, `fldc2`, `veryPrivateData` are private fields being exposed by inner classes.
 
 ## Suggested Score
-Based on the performance and completeness of the analyser, we think a score of **X out of 100** is fair.
+Based on the performance and completeness of the analyser, we think a score of **90 out of 100** is fair.
 
 ## Contribution Breakdown
 Provide a percentage contribution breakdown for each group member.
-- **Angus Duffy**: 50%
-- **Harry Morton**: 50%
-- **Callum Sergeant**: 50%
+- **Angus Duffy**: 33%
+- **Harry Morton**: 33%
+- **Callum Sergeant**: 33%
