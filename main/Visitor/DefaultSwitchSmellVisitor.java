@@ -10,20 +10,16 @@ public class DefaultSwitchSmellVisitor extends VoidVisitorAdapter<Void> {
 
     @Override
     public void visit(SwitchStmt switchStmt, Void arg) {
-        // Extract all entries (cases) from the switch statement
         NodeList<SwitchEntry> entries = switchStmt.getEntries();
 
         boolean hasDefault = false;
         boolean defaultAtEnd = false;
 
-        // Iterate over the entries to detect the presence of 'default'
         for (int i = 0; i < entries.size(); i++) {
             SwitchEntry entry = entries.get(i);
 
-            // Check if it's a 'default' case
             if (entry.getLabels().isEmpty()) {
                 hasDefault = true;
-                // Check if it's the last case
                 defaultAtEnd = (i == entries.size() - 1);
             }
         }
