@@ -11,6 +11,7 @@ import main.Driver;
 import javax.swing.text.html.Option;
 import java.util.Optional;
 
+// Class now updated to only look for integer literals
 public class AvoidConstantsSmellVisitor extends VoidVisitorAdapter<Void> {
 
     private void processLiterals(LiteralExpr n) {
@@ -33,39 +34,29 @@ public class AvoidConstantsSmellVisitor extends VoidVisitorAdapter<Void> {
             Driver.smellyCodeFound("In expression " + parent.get() + ", " + updatedNode + " should be a private final field");
         }
     }
-    @Override
-    public void visit(BooleanLiteralExpr expr, Void args) {
-        super.visit(expr, args);
-        processLiterals(expr);
-    }
-    @Override
-    public void visit(CharLiteralExpr expr, Void args) {
-        super.visit(expr, args);
-        processLiterals(expr);
-    }
-    @Override
-    public void visit(DoubleLiteralExpr expr, Void args) {
-        super.visit(expr, args);
-        processLiterals(expr);
-    }
+//    @Override
+//    public void visit(BooleanLiteralExpr expr, Void args) {
+//        super.visit(expr, args);
+//        processLiterals(expr);
+//    }
+//    @Override
+//    public void visit(CharLiteralExpr expr, Void args) {
+//        super.visit(expr, args);
+//        processLiterals(expr);
+//    }
+//    @Override
+//    public void visit(DoubleLiteralExpr expr, Void args) {
+//        super.visit(expr, args);
+//        processLiterals(expr);
+//    }
     @Override
     public void visit(IntegerLiteralExpr expr, Void args) {
         super.visit(expr, args);
         processLiterals(expr);
     }
-    @Override
-    public void visit(LongLiteralExpr expr, Void args) {
-        super.visit(expr, args);
-        processLiterals(expr);
-    }
-    @Override
-    public void visit(NullLiteralExpr expr, Void args) {
-        super.visit(expr, args);
-        processLiterals(expr);
-    }
-    @Override
-    public void visit(StringLiteralExpr expr, Void args) {
-        super.visit(expr, args);
-        processLiterals(expr);
-    }
+//    @Override
+//    public void visit(LongLiteralExpr expr, Void args) {
+//        super.visit(expr, args);
+//        processLiterals(expr);
+//    }
 }
