@@ -9,12 +9,13 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import main.dto.OuterPrivateVariableExposedDTO;
-
 import java.io.FileInputStream;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
+
         FileInputStream in = new FileInputStream("../cs409testsystem2024/src/goodCode/squeakyClean.java");
+
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(in);
@@ -50,13 +51,14 @@ public class Driver {
         new AvoidConstantsSmellVisitor().visit(cu, null);
         System.out.println();
 
-//        System.out.println("8: Don't ignore caught exceptions");
+        System.out.println("8: Don't ignore caught exceptions");
+        new CaughtExceptionsSmellVisitor().visit(cu, null);
 
         System.out.println("9: Don't change a for loop iteration variable in the body of the loop");
         new ForLoopIterationVariableModificationVisitor().visit(cu, null);
         System.out.println();
 
-//        System.out.println("10: Accessors and mutators should be appropriately named");
+        System.out.println("10: Accessors and mutators should be appropriately named");
 
         System.out.println("11: Switch default label is included");
         new DefaultSwitchSmellVisitor().visit(cu, null);
