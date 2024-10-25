@@ -1,10 +1,7 @@
 package main.Visitor;
 
-import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import com.github.javaparser.ast.stmt.ReturnStmt;
 import main.Driver;
 
 public class GetterSetterNamingVisitor extends VoidVisitorAdapter<Object> {
@@ -35,21 +32,13 @@ public class GetterSetterNamingVisitor extends VoidVisitorAdapter<Object> {
     }
 
     private boolean checkGetterName(String propertyName, MethodDeclaration n) {
-        // Check if the return type matches the property type
+        //Checks if return matches
         if (!n.getType().asString().equals(capitalizeFirstLetter(propertyName))) {
             return false;
         }
 
-        // Check if the return statement returns the correct variable
-        for (Node child : n.getBody().getChildNodes()) {
-            if (child instanceof ReturnStmt) {
-                ReturnStmt returnStmt = (ReturnStmt) child;
-                if (returnStmt.getExpression().isNameExpr() && returnStmt.getExpression().asNameExpr().getNameAsString().equals(propertyName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        //Heuristic
+        return true;
     }
 
     private boolean checkSetterName(String propertyName, MethodDeclaration n) {

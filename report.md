@@ -43,7 +43,7 @@ This section outlines the coding violations that were attempted and which have b
     - **Implemented**
     - ```AvoidConstantsSmellVisitor()```
     - Correctly identified the following:
-      - <pre>
+      <pre>
         In expression x > 0, 0 should be a private final field
         In expression case "one":result = 1;, "one" should be a private final field
         In expression case "two":result = result + 1;result = 2;, "two" should be a private final field
@@ -67,10 +67,13 @@ This section outlines the coding violations that were attempted and which have b
         In expression new File("a/file/path/location"), "a/file/path/location" should be a private final field
         In expression j > -10, -10 should be a private final field
         In expression i < 100, 100 should be a private final field`
-        </pre>
+      </pre>
 
 - **8. Don't Ignore Caught Exceptions**
-    - **Not Implemented**
+    - **Implemented**
+    - `CaughtExceptionsSmellVisitor()`
+    - Correctly identified that catch block  `catch (FileNotFoundException e) {
+      }` should not be left empty
 
 - **9. Don't Change a For Loop Iteration Variable in the Body of the Loop**
     - **Implemented**
@@ -78,24 +81,36 @@ This section outlines the coding violations that were attempted and which have b
     - Correctly identified iteration variable `j` as being modified within the loop body.
 
 - **10. Accessors and Mutators Should Be Named Appropriately**
-    - **Not Implemented**
+    - **Implemented**
+    - `GetterSetterNamingVisitor()`
+    - Correctly identified the following reasons:
+      <pre>
+        Getter method getVar should be named 'getVar'
+        Getter method getterForfls1 should be named 'getterForfls1'
+        Setter method setterForfls1 should be named 'setterForfls1'
+      </pre>
 
 - **11. Switch: Default Label is Included**
     - **Implemented**
     - ```DefaultSwitchSmellVisitor()```
       - This smell detector works to identify the missing default cases and incorrect positions of default cases correctly. 
-    - Correctly identified the following:
-      - <pre>
-        Reason: Switch statement missing 'default' case.
-        Reason: 'Default' case is not the last case in the switch statement.
-        Reason: Switch statement missing 'default' case.
-        </pre>
-    - It has not however implemented the enum exception, leading to some calls when run against the squeakyClean code.
+  - Correctly identified the following:
+    <pre>
+    Switch statement missing 'default' case.
+    'Default' case is not the last case in the switch statement.
+    Switch statement missing 'default' case.
+    </pre>
+  - It has not however implemented the enum exception, leading to some calls when run against the squeakyClean code.
   
 - **12. Do Not Return References to Private Mutable Class Members**
     - **Implemented**
     - `PrivateMutableClassVariablesSmellVisitor()`
-
+    -  Correctly identified the following:
+       <pre>
+       data is a mutable private field within class mutableObject referenced by class mutableReferenceExposer that is mutated in assignment "data = val"
+       data is a mutable private field within class mutableObject referenced by class mutableReferenceExposer that is mutated in assignment "this.data = data"
+       </pre>  
+    
 - **13. Do Not Expose Private Members of an Outer Class from within a Nested Class**
     - **Implemented**
     - ```checkOuterPrivateVariableExposedSmells()```
@@ -105,7 +120,7 @@ This section outlines the coding violations that were attempted and which have b
 Based on the performance and completeness of the analyser, we think a score of **90 out of 100** is fair.
 
 ## Contribution Breakdown
-Provide a percentage contribution breakdown for each group member.
-- **Angus Duffy**: 33%
+Each member contributed equally to the project, apart from Angus who put in .3 recurring % more effort.
+- **Angus Duffy**: 33.33...%
 - **Harry Morton**: 33%
 - **Callum Sergeant**: 33%

@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 public class Driver {
     public static void main(String[] args) throws Exception {
 
-        FileInputStream in = new FileInputStream("../cs409testsystem2024/src/goodCode/squeakyClean.java");
+        FileInputStream in = new FileInputStream("../cs409testsystem2024/src/badCode/multipleBadCodeInstances.java");
 
         CompilationUnit cu;
         try {
@@ -59,6 +59,8 @@ public class Driver {
         System.out.println();
 
         System.out.println("10: Accessors and mutators should be appropriately named");
+        new GetterSetterNamingVisitor().visit(cu, null);
+        System.out.println();
 
         System.out.println("11: Switch default label is included");
         new DefaultSwitchSmellVisitor().visit(cu, null);
