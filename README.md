@@ -32,7 +32,7 @@
   - **Marks:** 3-6
 
 ### 5. Avoid local declarations that hide declarations at higher levels
-- [ ] Do not declare the same variable name in an inner block.
+- [x] Do not declare the same variable name in an inner block.
   - **Example:**
     ```java
     int count;
@@ -43,7 +43,7 @@
   - **Marks:** 8
 
 ### 6. Switch: Fall-through is commented
-- [ ] Within a switch block, comment each statement group that does not terminate abruptly (with break, continue, return, or throw).
+- [x] Within a switch block, comment each statement group that does not terminate abruptly (with break, continue, return, or throw).
   - **Example:**
     ```java
     switch (input) {
@@ -61,7 +61,7 @@
   - **Marks:** 8
 
 ### 7. Avoid constants in code
-- [ ] Numerical constants (literals) should not be hardcoded directly.
+- [x] Numerical constants (literals) should not be hardcoded directly.
   - **Example:**
     ```java
     if (a == 255 && b.equals("admin123")) { ... }
@@ -85,7 +85,7 @@
   - **Marks:** 6-8
 
 ### 9. Don't change a `for` loop iteration variable in the body of the loop
-- [ ] Avoid changing the iteration variable in the body of the loop.
+- [x] Avoid changing the iteration variable in the body of the loop.
   - **Example:**
     ```java
     for (int i = 0; i < 10; i++) {
@@ -108,7 +108,7 @@
   - **Marks:** 8
 
 ### 11. Switch: default label is included
-- [ ] Each `switch` statement includes a `default` statement, even if it contains no code, and it should be the last option.
+- [x] Each `switch` statement includes a `default` statement, even if it contains no code, and it should be the last option.
   - **Example:**
     ```java
     switch (input) {
@@ -126,7 +126,7 @@
   - **Marks:** 6-10
 
 ### 12. Do not return references to private mutable class members
-- [ ] Returning references to private mutable members can compromise encapsulation and security.
+- [x] Returning references to private mutable members can compromise encapsulation and security.
   - **Example:**
     ```java
     public class MutableClass {
@@ -138,7 +138,7 @@
   - **Marks:** 10
 
 ### 13. Do not expose private members of an outer class from within a nested class
-- [ ] The nested class should not expose private members of the outer class to external classes.
+- [x] The nested class should not expose private members of the outer class to external classes.
   - **Example:**
     ```java
     class Coordinates {
