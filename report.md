@@ -108,7 +108,7 @@ This section outlines the coding violations that were attempted and which have b
 Based on the performance and completeness of the analyser, we think a score of **91 out of 100** is fair. This takes into consideration the small discrepancies between our code and what is requested in the marking scheme.
 
 ## Contribution Breakdown
-Each member contributed equally to the project, apart from Angus who put in .3 recurring % more effort.
-- **Angus Duffy**: 33.33...%
+Each member contributed equally to the project.
+- **Angus Duffy**: 33%
 - **Harry Morton**: 33%
 - **Callum Sergeant**: 33%
