@@ -1,8 +1,7 @@
-# roper
+# Java code smell detector with Javaparser
 
 
-
-# Code Smell Checklist
+## Code Smell Checklist
 
 ### 1. Initialise local variables on declaration
 - [x] Local variables should have initializers or be initialized immediately after declaration.
