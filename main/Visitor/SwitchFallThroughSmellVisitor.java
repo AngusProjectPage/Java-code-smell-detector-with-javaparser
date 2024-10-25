@@ -83,9 +83,29 @@ public class SwitchFallThroughSmellVisitor extends VoidVisitorAdapter<Void> {
 
             // If no abrupt termination and no valid fallthrough comment, flag it as smelly
             if (!hasAbruptTermination(caseBlock)) {
-                Driver.smellyCodeFound("Fallthrough detected without comment or abrupt termination in switch case block.");
+                // Extract the triggering line (usually the last line without break/return/continue/throw)
+                String triggeringLine = getTriggeringLine(caseBlock);
+                Driver.smellyCodeFound("Fallthrough detected without comment or abrupt termination in switch case block. Triggering line: " + triggeringLine);
             }
         }
+    }
+
+    private String getTriggeringLine(String caseBlock) {
+        // Split the case block into lines
+        String[] lines = caseBlock.split("\n");
+
+        // Find the last non-empty line that isn't a break, return, continue, or throw
+        for (int i = lines.length - 1; i >= 0; i--) {
+            String line = lines[i].trim();
+
+            // Ignore empty lines and lines with abrupt termination
+            if (!line.isEmpty() && !line.contains("break;") && !line.contains("return;") &&
+                    !line.contains("continue;") && !line.contains("throw")) {
+                return line;
+            }
+        }
+
+        return caseBlock.trim();
     }
 
     // Check if a case block has an abrupt termination (break, return, continue, throw)
@@ -96,7 +116,6 @@ public class SwitchFallThroughSmellVisitor extends VoidVisitorAdapter<Void> {
 
     // Check if a case block has a valid fallthrough comment
     private boolean hasValidFallthroughComment(String caseBlock) {
-        // We only care about the exact "fall through" comment, ignoring other comments
         return caseBlock.toLowerCase().contains("fall through");
     }
 }

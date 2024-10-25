@@ -52,9 +52,9 @@ public class PrivateMutableClassVariablesSmellVisitor extends VoidVisitorAdapter
     }
 
     public void mutableObject(Type type, String classname) throws IOException {
-        FileInputStream in = new FileInputStream("C:\\dev\\" + type.asString() + ".java");
-        CompilationUnit cu;
         try {
+            FileInputStream in = new FileInputStream("C:\\dev\\" + type.asString() + ".java");
+            CompilationUnit cu;
             cu = StaticJavaParser.parse(in);
             PrivateVariableAndSetterDTO privateVariableAndSetterDTO = new PrivateVariableAndSetterDTO();
             new PrivateVariableAndSetterVisitor().visit(cu, privateVariableAndSetterDTO);
@@ -65,8 +65,9 @@ public class PrivateMutableClassVariablesSmellVisitor extends VoidVisitorAdapter
                     }
                 }
             }
-        } finally {
             in.close();
+        } catch(IOException e) {
+            System.out.println("Reference not found " + e.getMessage());
         }
     }
 }
