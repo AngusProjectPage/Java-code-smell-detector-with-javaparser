@@ -8,12 +8,12 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import main.dto.OuterPrivateVariableExposedDTO;
-
 import java.io.FileInputStream;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
-        FileInputStream in = new FileInputStream("C:\\dev\\multipleBadCodeInstances.java");
+
+        FileInputStream in = new FileInputStream("C:\\dev\\squeakyClean.java");
         CompilationUnit cu;
         try {
             cu = StaticJavaParser.parse(in);
@@ -56,7 +56,7 @@ public class Driver {
         new ForLoopIterationVariableModificationVisitor().visit(cu, null);
         System.out.println();
 
-        // System.out.println("10: Accessors and mutators should be appropriately named");
+         System.out.println("10: Accessors and mutators should be appropriately named");
 
         System.out.println("11: Switch default label is included");
         new DefaultSwitchSmellVisitor().visit(cu, null);
@@ -65,10 +65,10 @@ public class Driver {
         System.out.println("12: Do not return references to private mutable class members");
         new PrivateMutableClassVariablesSmellVisitor().visit(cu, null);
         System.out.println();
-
-        System.out.println("13: Do not expose private members of an outer class from within a nested class");
-        checkOuterPrivateVariableExposedSmells(cu);
-        System.out.println();
+//
+//        System.out.println("13: Do not expose private members of an outer class from within a nested class");
+//        checkOuterPrivateVariableExposedSmells(cu);
+//        System.out.println();
     }
 
     public static void checkOuterPrivateVariableExposedSmells(CompilationUnit cu) {
