@@ -40,34 +40,21 @@ This section outlines the coding violations that were attempted and which have b
     - Correctly identified `result = 1`, `result = 2`, `{`, `case 1:`, and `result = 3` as falling through a switch statement without a comment or abrupt termination.
 
 - **7. Avoid Constants in Code**
-    - **Implemented**
-    - ```AvoidConstantsSmellVisitor()```
-    - Correctly identified the following:
-      <pre>
-        In expression x > 0, 0 should be a private final field
-        In expression case "one":result = 1;, "one" should be a private final field
-        In expression case "two":result = result + 1;result = 2;, "two" should be a private final field
-        In expression result + 1, 1 should be a private final field
-        In expression case "three":result = result + 1;result = 3;, "three" should be a private final field
-        In expression result + 1, 1 should be a private final field
-        In expression case 1:, 1 should be a private final field
-        In expression case 2:result = result + response;break;, 2 should be a private final field
-        In expression case 3:result = result / response;result = 3;, 3 should be a private final field
-        In expression case 4:result = result * response;break;, 4 should be a private final field
-        In expression System.out.println("Aay"), "Aay" should be a private final field
-        In expression System.out.println("Eee"), "Eee" should be a private final field
-        In expression System.out.println("Eye"), "Eye" should be a private final field
-        In expression System.out.println("Oh"), "Oh" should be a private final field
-        In expression b == '!', '!' should be a private final field
-        In expression d.equals("Trellis"), "Trellis" should be a private final field
-        In expression c - 0.05, 0.05 should be a private final field
-        In expression c - 0.01, 0.01 should be a private final field
-        In expression a != 10, 10 should be a private final field
-        In expression c > 3.14159, 3.14159 should be a private final field
-        In expression new File("a/file/path/location"), "a/file/path/location" should be a private final field
-        In expression j > -10, -10 should be a private final field
-        In expression i < 100, 100 should be a private final field`
-      </pre>
+  - **Implemented**
+  - ```AvoidConstantsSmellVisitor()```
+  - Correctly identified the following:
+    <pre>
+    In expression x > 0, 0 should be a private final field
+    In expression result + 1, 1 should be a private final field
+    In expression result + 1, 1 should be a private final field
+    In expression case 1:, 1 should be a private final field
+    In expression case 2:result = result + response;break;, 2 should be a private final field
+    In expression case 3:result = result / response;result = 3;, 3 should be a private final field
+    In expression case 4:result = result * response;break;, 4 should be a private final field
+    In expression a != 10, 10 should be a private final field
+    In expression j > -10, -10 should be a private final field
+    In expression i < 100, 100 should be a private final field
+    </pre>
 
 - **8. Don't Ignore Caught Exceptions**
     - **Implemented**
@@ -83,12 +70,13 @@ This section outlines the coding violations that were attempted and which have b
 - **10. Accessors and Mutators Should Be Named Appropriately**
     - **Implemented**
     - `GetterSetterNamingVisitor()`
-    - Correctly identified the following reasons:
+    - Identified the following reasons:
       <pre>
-        Getter method getVar should be named 'getVar'
-        Getter method getterForfls1 should be named 'getterForfls1'
-        Setter method setterForfls1 should be named 'setterForfls1'
+      Getter method getVar should be named 'getVar'
+      Getter method getterForfls1 should be named 'getterForfls1'
+      Setter method setterForfls1 should be named 'setterForfls1'
       </pre>
+    - **Notes**: Some of the cases were flagged as a false positive, see output above.
 
 - **11. Switch: Default Label is Included**
     - **Implemented**
@@ -117,7 +105,7 @@ This section outlines the coding violations that were attempted and which have b
     - Correctly identified `roomNumber`, `accessPoint`, `fldi1`, `fldi2`, `fldc1`, `fldc2`, `veryPrivateData` are private fields being exposed by inner classes.
 
 ## Suggested Score
-Based on the performance and completeness of the analyser, we think a score of **90 out of 100** is fair.
+Based on the performance and completeness of the analyser, we think a score of **91 out of 100** is fair. This takes into consideration the small discrepancies between our code and what is requested in the marking scheme.
 
 ## Contribution Breakdown
 Each member contributed equally to the project, apart from Angus who put in .3 recurring % more effort.
