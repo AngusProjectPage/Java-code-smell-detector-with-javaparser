@@ -70,7 +70,7 @@
   - **Marks:** 6-8
 
 ### 8. Don't ignore caught exceptions
-- [ ] When ignoring a caught exception, explain why with a comment.
+- [x] When ignoring a caught exception, explain why with a comment.
   - **Example:**
     ```java
     try {
@@ -96,7 +96,7 @@
   - **Marks:** 8
 
 ### 10. Accessors and Mutators should be named appropriately
-- [ ] Getters and setters should be named using the `getVariableName`/`setVariableName` convention.
+- [x] Getters and setters should be named using the `getVariableName`/`setVariableName` convention.
   - **Example:**
     ```java
     public class CheckingAccount {
